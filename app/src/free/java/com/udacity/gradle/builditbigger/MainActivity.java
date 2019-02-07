@@ -47,12 +47,19 @@ public class MainActivity extends AppCompatActivity implements EndpointsAsyncTas
         interstitialAd.loadAd(new AdRequest.Builder().build());
     }
 
+    private void configureAd() {
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+        interstitialAd.setAdUnitId(AD_ID);
+        adView.loadAd(adRequest);
+    }
+
     private void configureViews() {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showLoader(true);
-
                 requestJoke();
 
                 if (interstitialAd.isLoaded()) {
@@ -65,14 +72,6 @@ public class MainActivity extends AppCompatActivity implements EndpointsAsyncTas
 
     private void requestJoke() {
         new EndpointsAsyncTask(this).execute();
-    }
-
-    private void configureAd() {
-        AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .build();
-        interstitialAd.setAdUnitId(AD_ID);
-        adView.loadAd(adRequest);
     }
 
     private void showLoader(boolean show) {
