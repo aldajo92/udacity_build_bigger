@@ -1,6 +1,5 @@
 package com.udacity.gradle.builditbigger;
 
-import android.content.Context;
 import android.os.AsyncTask;
 
 import com.google.api.client.extensions.android.http.AndroidHttp;
@@ -11,14 +10,18 @@ import com.udacity.gradle.builditbigger.backend.myApi.MyApi;
 
 import java.io.IOException;
 
-public class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
+public class EndpointsAsyncTask extends AsyncTask<Void, Void, String> {
+
     private static MyApi myApiService = null;
-    private Context context;
-    AsyncResponse delegate = null;
+
+    private EndPointRequestListener listener;
+
+    public EndpointsAsyncTask(EndPointRequestListener listener){
+        this.listener = listener;
+    }
 
     @Override
-    protected String doInBackground(Context... params) {
-
+    protected String doInBackground(Void... params) {
         if(myApiService == null) {  // Only do this once
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
                     new AndroidJsonFactory(), null)
@@ -37,11 +40,7 @@ public class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
             myApiService = builder.build();
         }
 
-        context = params[0];
-        delegate= (AsyncResponse) context;
         //String name = params[0].second;
-
-
 
         try {
             return myApiService.sayHi().execute().getData();
@@ -52,11 +51,10 @@ public class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        delegate.processFinish(result);
-        //Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+        listener.processFinish(result);
     }
 
-    public interface AsyncResponse {
+    public interface EndPointRequestListener {
         void processFinish(String output);
     }
 }
