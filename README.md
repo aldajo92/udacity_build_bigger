@@ -1,11 +1,21 @@
-# Gradle for Android and Java Final Project
+# Udacity BuildBigger App
 
+### Description
 
+The app consist of four modules:
 
-### Optional Components
+1. A Java library that provides jokes
+2. A Google Cloud Endpoints (GCE) project that serves those jokes
+3. An Android Library containing an activity for displaying jokes
+4. An Android app that fetches jokes from the GCE module and passes them to the Android Library for display
 
-Once you have a functioning project, consider adding more features to test your Gradle and Android skills. Here are a few suggestions:
+### Why this Project?
+As Android projects grow in complexity, it becomes necessary to customize the behavior of the Gradle build tool, allowing automation of repetitive tasks. Particularly, factoring functionality into libraries and creating product flavors allow for much bigger projects with minimal added complexity.
 
-* Make the free app variant display interstitial ads between the main activity and the joke-displaying activity.
-* Have the app display a loading indicator while the joke is being fetched from the server.
-* Write a Gradle task that starts the GCE dev server, runs all the Android tests, and shuts down the dev server.
+### Diagram
+
+<img src="https://d17h27t6h515a5.cloudfront.net/topher/2017/October/59f8ff3d_screen-shot-2017-10-31-at-3.54.32-pm/screen-shot-2017-10-31-at-3.54.32-pm.png" height="500">
+
+### Reference
+This repository is based on a assignment of Udacity's Android Developer.
+[Original Project](https://github.com/udacity/ud867/tree/master/FinalProject)
