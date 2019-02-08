@@ -15,9 +15,8 @@ import static junit.framework.TestCase.assertNotNull;
 import static junit.framework.TestCase.assertTrue;
 
 @RunWith(AndroidJUnit4.class)
-public class MainActivityTest {
+public class MainActivityTest implements EndpointsAsyncTask.EndPointRequestListener {
 
-    Context context;
     private Context instrumentationContext;
 
     @Before
@@ -29,7 +28,7 @@ public class MainActivityTest {
     public void testVerifyJoke() throws InterruptedException {
         final CountDownLatch latch = new CountDownLatch(1);
 
-        EndpointsAsyncTask testTask = new EndpointsAsyncTask() {
+        EndpointsAsyncTask testTask = new EndpointsAsyncTask(this) {
 
             @Override
             protected void onPostExecute(String result) {
@@ -41,7 +40,12 @@ public class MainActivityTest {
                 }
             }
         };
-        testTask.execute(context);
+        testTask.execute();
         latch.await();
+    }
+
+    @Override
+    public void processFinish(String output) {
+
     }
 }

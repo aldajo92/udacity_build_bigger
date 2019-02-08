@@ -8,6 +8,7 @@ import android.widget.Button;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 import com.projects.aldajo92.jokesandroid.ShowJokesActivity;
 
 public class MainActivity extends BaseActivity implements EndpointsAsyncTask.EndPointRequestListener {
@@ -21,6 +22,8 @@ public class MainActivity extends BaseActivity implements EndpointsAsyncTask.End
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        MobileAds.initialize(this, getString(R.string.admob_app_id));
 
         interstitialAd = new InterstitialAd(this);
 
